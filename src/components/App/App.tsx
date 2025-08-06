@@ -45,13 +45,13 @@ export default function App() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(`Помилка: ${error?.message || 'Не вдалося отримати фільми'}`);
+      toast.error(`Error: ${error?.message || 'There was an error, please try again.'}`);
     }
   }, [isError, error]);
 
   useEffect(() => {
     if (isSuccess && movies.length === 0 && query !== '') {
-      toast.info(`Фільмів за запитом "${query}" не знайдено.`);
+      toast.info(`Movies not found for the query "${query}"`);
     }
   }, [isSuccess, movies, query]);
 
@@ -73,7 +73,7 @@ export default function App() {
         />
       )}
       {isLoading && <Loader />}
-      {isError && <ErrorMessage message={error?.message} />}
+      {isError && <ErrorMessage />}
       {!isLoading && !isError && movies.length > 0 && (
         <MovieGrid onSelect={handleSelectMovie} movies={movies} />
       )}
